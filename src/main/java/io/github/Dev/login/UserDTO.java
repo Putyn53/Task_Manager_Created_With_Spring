@@ -1,28 +1,30 @@
 package io.github.Dev.login;
 
 public class UserDTO {
-    private Integer id;
-    private String code;
+    private String email;
 
-    public UserDTO(Lang lang)
+    public UserDTO(User user)
     {
-        this.id = lang.getId();
-        this.code = lang.getCode();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+    }
+    public String getEmail() {
+        return email;
     }
 
-    public Integer getId() {
-        return id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getPassword() {
+        return password;
     }
 
-    public String getCode() {
-        return code;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+    private String password;
+
+
 }

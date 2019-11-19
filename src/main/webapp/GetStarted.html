@@ -117,7 +117,7 @@
 						email: welcomeForm.elements.email.value,
 						password: welcomeForm.elements.password.value
 					};
-					fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+					fetch(`http://localhost:8080/task/login?${new URLSearchParams(formObj)}`)
 							.then(response => response.text())
 							.then((text) => {
 								if(text === "granted")
