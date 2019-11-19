@@ -35,7 +35,7 @@ class TodoServlet{
     ResponseEntity<Todo> toggleTodo(@PathVariable Integer id){
         Optional<Todo> todo = repository.findById(id);
         todo.ifPresent(t ->{
-            t.setDone(t.isDone());
+            t.setDone(!t.isDone());
             repository.save(t);
         });
         return todo.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());

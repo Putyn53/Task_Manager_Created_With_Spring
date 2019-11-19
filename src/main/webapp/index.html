@@ -2,125 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ULTIMATE TODO LIST</title>
+    <title>Task Manager</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/layouts/marketing-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css/layouts/marketing.css">
+    <!--<![endif]-->
 </head>
 <body>
-<main style="width: 40%; margin: 0 auto">
-    <div id="welcome" style="text-align: center">
-        <h1>Introduce yourself</h1>
+<main>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="">Task Manager</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="http://localhost:8080" class="pure-menu-link">Home</a></li>
+            </ul>
+        </div>
     </div>
-    <form id="welcomeForm" class="pure-form pure-g pure-form-aligned">
-        <input class="pure-input-rounded pure-u-1" name="name" placeholder="name">
-        <fieldset id="langs" class="pure-u-1 pure-control-group">Loading...</fieldset>
-        <button id="btn" class="pure-button pure-button-primary pure-u-1">Submit</button>
-    </form>
-    <form id="todoForm" class="pure-form" style="display: none; text-align: center">
-        <fieldset>
-            <input id="todoText" class="pure-input-rounded pure-input-2-3" placeholder="new TODO">
-            <button id="addTodo" class="pure-button pure-button-primary">+</button>
-        </fieldset>
-        <fieldset id="allTodos"></fieldset>
-    </form>
+
+    <div class="splash-container">
+        <div class="splash">
+            <h1 class="splash-head">Start Your Journey</h1>
+            <p class="splash-subhead">
+                Imagine how simple it may be to manage your tasks!
+            </p>
+            <p>
+                <a href="WelcomePage/GetStarted.html" class="pure-button pure-button-primary">Get Started</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content">
+            <h2 class="content-head is-center">More about Task Manager</h2>
+
+            <div class="pure-g">
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+
+                    <h3 class="content-subhead">
+                        <i class="fa fa-rocket"></i>
+                        How it all started
+                    </h3>
+                    <p>
+                        Project started as just simple way to learn Spring framework, but as the time passed I learned
+                        that management of your own tasks is really important and that is how I eventually created this
+                        app.
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-mobile"></i>
+                        Mobile Version?
+                    </h3>
+                    <p>
+                        Maybe one day I will implement it! Stay in touch!
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-th-large"></i>
+                        Easy to use
+                    </h3>
+                    <p>
+                        The best thing about managing your tasks is when it is easy to do so! Well... all of that you
+                        already found here :).
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-check-square-o"></i>
+                        Check everything!
+                    </h3>
+                    <p>
+                        On any given time you can change the status of your task, remove them, add new ones, or even edit!
+                        All you need to do is just log on and take tasks of your life into your own hands!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ribbon l-box-lrg pure-g">
+            <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+                <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/file-icons.png">
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+
+                <h2 class="content-head content-head-ribbon">Technical Issues</h2>
+
+                <p>
+                    If there are any technical issues or boundaries just let me know on my e-mail: putekwaw@gmail.com
+                    <br>
+                    If you can see it, I can fix it!
+                </p>
+            </div>
+        </div>
+        <div class="footer l-box is-center">
+            "This page was created with help of purecss.io so shoutout to them! Not even a single copyright right here ;)" - Kacper Putynkowski
+        </div>
+    </div>
 </main>
-<script>
-    (function() {
-
-        const API_URL = 'http://localhost:8080/task';
-
-        const TODO_API_URL = `${API_URL}/todos`;
-
-        const todoText = document.getElementById('todoText');
-
-        fetch(TODO_API_URL)
-            .then(processOkResponse)
-            .then(todos => todos.forEach(createNewTodo));
-
-        document.getElementById('addTodo').addEventListener('click', (event) => {
-            event.preventDefault();
-            fetch(TODO_API_URL, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ text: todoText.value })
-            })
-                .then(processOkResponse)
-                .then(createNewTodo)
-                .then(() => todoText.value = '')
-                .catch(console.warn);
-        });
-
-        function createNewTodo(todo) {
-            const label = document.createElement('label');
-            label.classList.add('pure-checkbox');
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.checked = todo.done;
-            checkbox.addEventListener('click',
-                (event) => {
-                    event.preventDefault();
-                    fetch(`${TODO_API_URL}/${todo.id}`, { method: 'PUT' })
-                        .then(processOkResponse)
-                        .then(updatedTodo => checkbox.checked = !!updatedTodo.done)
-                        .catch(console.warn);
-                });
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(` ${todo.text}`));
-            document.getElementById('allTodos').appendChild(label);
-        }
-
-        initWelcomeForm();
-
-        function initWelcomeForm() {
-            const CODE_TO_EMOJI = {
-                'pl': '🇵🇱',
-                'en': '🇺🇸',
-                'de': '🇩🇪'
-            };
-            fetch(`${API_URL}/languages`)
-                .then(processOkResponse)
-                .then(langArr => {
-                    document.getElementById('langs').innerHTML = langArr.map(lang => `
-              <label class="pure-radio">
-                <input type="radio" name="lang" value="${lang.id}">
-                ${CODE_TO_EMOJI[lang.code]}
-              </label>
-          `).join('\n');
-                    initWelcomeFormClick();
-                });
-        }
-
-        function initWelcomeFormClick() {
-            const welcomeForm = document.getElementById('welcomeForm');
-
-            document.getElementById('btn').addEventListener('click', (event) => {
-                event.preventDefault();
-                const formObj = {
-                    name: welcomeForm.elements.name.value,
-                    lang: welcomeForm.elements.lang.value
-                };
-                fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
-                    .then(response => response.text())
-                    .then((text) => {
-                        document.getElementById('welcome').innerHTML = `
-                <h1>${text}</h1>
-            `;
-                        welcomeForm.remove();
-                        document.getElementById('todoForm').style.display = 'block';
-                    });
-            });
-        }
-
-        function processOkResponse(response = {}) {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(`Status not 200 (${response.status})`);
-        }
-    })();
-</script>
 </body>
 </html>

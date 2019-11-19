@@ -1,23 +1,15 @@
 package io.github.Dev.hello;
+import io.github.Dev.lang.Lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 public class HelloServlet{
 
-    private static final String NAME_PARAM = "name";
-    private static final String LANG_PARAM = "lang";
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
 
     private HelloService service;
@@ -38,6 +30,10 @@ public class HelloServlet{
     String welcome(@RequestParam("lang") Integer langId, @RequestParam String name)
     {
         logger.info("Got Request");
+        if(langId == null || name == null)
+        {
+            return service.prepareGreeting(HelloService.FALLBACK_NAME,HelloService.FALLBACK_LANG.getId());
+        }else
         return service.prepareGreeting(name,langId);
     }
 }
