@@ -22,6 +22,7 @@ p {
  */
 .l-content {
     margin: 0 auto;
+    display: inline;
 }
 
 .l-box {
@@ -131,9 +132,10 @@ p {
  * Styles for the price and the corresponding <span>per month</span>
  */
 .pricing-table-price {
-    font-size: 60px;
+    font-size: 30px;
     margin: 0.2em 0 0;
     font-weight: 100;
+    display: inline-block;
 }
     .pricing-table-price span {
         display: block;
