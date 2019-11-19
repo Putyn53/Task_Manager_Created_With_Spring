@@ -117,6 +117,7 @@
 						email: welcomeForm.elements.email.value,
 						password: welcomeForm.elements.password.value
 					};
+					fetch('http://localhost:8080/task/login').then(response => response.text())
 					fetch(`http://localhost:8080/task/login?${new URLSearchParams(formObj)}`)
 							.then(response => response.text())
 							.then((text) => {

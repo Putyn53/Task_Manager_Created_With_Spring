@@ -5,5 +5,5 @@ CREATE TABLE user (
     password VARCHAR (30) NOT NULL,
     email VARCHAR (30) NOT NULL
 );
-INSERT INTO users (name, real_name, password, email) values ('Admin','Admin','admin1', 'putekwaw@gmail.com');
-INSERT INTO users (name, real_name, password, email) values ('Putek','Kacper','haslo1', 'kacput@gmail.com');
+INSERT INTO user (name, real_name, password, email) values ('Admin','Admin','admin1', 'putekwaw@gmail.com');
+INSERT INTO user (name, real_name, password, email) values ('Putek','Kacper','haslo1', 'kacput@gmail.com');

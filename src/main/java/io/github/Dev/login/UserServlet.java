@@ -1,5 +1,5 @@
 package io.github.Dev.login;
-import io.github.Dev.hello.HelloService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +12,36 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/task")
 class UserServlet {
 
     private final Logger logger = LoggerFactory.getLogger(UserServlet.class);
 
     private UserService service;
+    private UserRepository repository;
 
 
-    UserServlet(UserService service)
+    UserServlet(UserService service, UserRepository repository)
     {
         this.service = service;
+        this.repository = repository;
     }
 
-    @GetMapping(value = "/task/login")
-    String welcome()
+    @GetMapping(value = "/task/login*")
+    String logIn()
     {
-        return welcome(null, null);
+        return logIn(null, null);
     }
 
-    @GetMapping(value = "/task/login", params = {"lang", "name"})
-    String welcome(@RequestParam("lang") Integer langId, @RequestParam String name)
+    @GetMapping(value = "/task/login*", params = {"email", "password"})
+    String logIn(@RequestParam("email") String email, @RequestParam String password)
     {
         logger.info("Got Request");
-        if(langId == null || name == null)
+        if(repository.findByEmailAndPassword(email,password) != null)
         {
-            return service.prepareGreeting(HelloService.FALLBACK_NAME,HelloService.FALLBACK_LANG.getId());
-        }else
-            return service.prepareGreeting(name,langId);
+            return "granted";
+        }
+        else{
+            return "You entered wrong email or password";
+        }
     }
 }
