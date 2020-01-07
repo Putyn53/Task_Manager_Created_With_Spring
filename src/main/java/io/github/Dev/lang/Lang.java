@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name="languages")
 public class Lang
 {
+
     @Id
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
